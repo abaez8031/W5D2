@@ -20,7 +20,7 @@
 #  actor_id    :integer      not null, primary key
 #  ord         :integer
 
-require_relative './sqlzoo.rb'
+require_relative "./sqlzoo.rb"
 
 def example_query
   execute(<<-SQL)
@@ -36,12 +36,24 @@ end
 def films_from_sixty_two
   # List the films where the yr is 1962 [Show id, title]
   execute(<<-SQL)
+  SELECT 
+    id, title
+  FROM 
+    movies
+  WHERE
+    yr = 1962;
   SQL
 end
 
 def year_of_kane
   # Give year of 'Citizen Kane'.
   execute(<<-SQL)
+  SELECT 
+    yr
+  FROM 
+    movies
+  WHERE
+    title LIKE 'Citizen Kane';
   SQL
 end
 
@@ -50,6 +62,14 @@ def trek_films
   # these movies include the words Star Trek in the title). Order results by
   # year.
   execute(<<-SQL)
+  SELECT 
+    id, title, yr
+  FROM
+    movies
+  WHERE
+    title LIKE '%Star Trek%'
+  ORDER BY
+    yr ASC;
   SQL
 end
 
